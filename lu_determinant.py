@@ -1,5 +1,6 @@
 from sympy import Matrix, simplify, init_printing, latex, eye 
 from IPython.display import display, Math
+import sympy
 
 init_printing(use_latex=True)
 
@@ -22,7 +23,7 @@ def lu_determinant(A):
 
     # Build the permutation matrix from the row swap indices (perm_list)
     n = A.rows
-    P = eye(n)  # eye function is now imported and available
+    P = sympy.eye(n)  # eye function is now imported and available
     k = 0  # Initialize the row swap count
 
     # Fix: Handle potential lists in perm_list for pivoting
