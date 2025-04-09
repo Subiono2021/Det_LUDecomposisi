@@ -17,14 +17,13 @@ def lu_determinant(A):
         k (int): Banyaknya pertukaran baris
         P (sympy.Matrix): Matriks permutasi
     """
-    # Lakukan dekomposisi LU dengan pivoting
+    # Lakukan dekomposisi LU
     L, U, perm = A.LUdecomposition()
     n = A.rows
-    P = eye(n)  # Matriks identitas awal
-    k = 0       # Jumlah pertukaran baris
+    P = eye(n)
+    k = 0
+    perm = list(perm)
 
-    # Bangun matriks P dari daftar permutasi
-    perm = list(perm)  # Salin agar bisa dimodifikasi
     for i in range(n):
         while perm[i] != i:
             j = perm[i]
@@ -32,12 +31,11 @@ def lu_determinant(A):
             perm[i], perm[j] = perm[j], perm[i]
             k += 1
 
-    # Hitung determinan dengan (-1)^k * produk diagonal U
     sign = (-1) ** k
     diag_product = simplify(prod([U[i, i] for i in range(U.rows)]))
     det_A = simplify(sign * diag_product)
 
-    # Tampilkan hasil dalam LaTeX
+    # Tampilkan hasil
     display(Math(r"A = " + latex(A)))
     display(Math(r"P = " + latex(P)))
     display(Math(r"L = " + latex(L)))
